@@ -2,18 +2,22 @@ import pandas as pd
 import re
 from datetime import datetime
 
-# def standardize_date(date_str):
-#     if pd.isnull(date_str) or date_str == '':
-#         return date_str
-#     numbers = re.findall(r'\d+', date_str)
-#     if not numbers:
-#         return date_str
-#     if len(numbers) == 1:
-#         return numbers[0]
-#     elif len(numbers) == 2:
-#         return f"{numbers[0]}/{numbers[1].zfill(2)}"
-#     elif len(numbers) >= 3:
-#         return f"{numbers[0]}/{numbers[1].zfill(2)}/{numbers[2].zfill(2)}"
+def standardize_date(date_str):
+    # Convert to string if date_str is not already a string
+    if not isinstance(date_str, str):
+        date_str = str(date_str)
+        
+    if pd.isnull(date_str) or date_str == '':
+        return date_str
+    numbers = re.findall(r'\d+', date_str)
+    if not numbers:
+        return date_str
+    if len(numbers) == 1:
+        return numbers[0]
+    elif len(numbers) == 2:
+        return f"{numbers[0]}/{numbers[1].zfill(2)}"
+    elif len(numbers) >= 3:
+        return f"{numbers[0]}/{numbers[1].zfill(2)}/{numbers[2].zfill(2)}"
 
 
 def process_excel_file(input_path, output_path):
